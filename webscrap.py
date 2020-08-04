@@ -1,30 +1,36 @@
 import requests
 from bs4 import BeautifulSoup
 from string import digits
+import sys
 
 refrnr = 0
 tryagain = 1
-fr = open("webscrapuid", "r")
-uidpreset = fr.read()
-fr.close()
-fw = open("webscrapuid", "w")
-fw2 = open("webscrapuid", "w")
+f = open("webscrapuid", "r")
+uidpreset = f.read()
 
 if uidpreset == "":
     uid = int(input("Enter a valid UID: "))
     struid = str(uid)
     savechoice = int(input("Type 1 to save UID for automatic use (can change later): "))
     if savechoice == 1:
-        open("webscrapuid", "w")
-        fw.truncate(0)
-        fw.write(struid)
-        fw.close()
+        f = open("webscrapuid", "w")
+        f.write(struid)
+        f.close()
         print("UID was successfully saved")
+        print("")
     else:
         print("UID not saved")
+        print("")
 else:
-    uidpreset = ''.join(c for c in uidpreset if c in digits)
-    struid = uidpreset
+    if uidpreset == "setup":
+        f = open("webscrapuid", "w")
+        f.truncate(0)
+        f.close()
+        print("Initial setup has initiated. Script stopping, please restart the script to get started.")
+        sys.exit(2)
+    else:
+        uidpreset = ''.join(c for c in uidpreset if c in digits)
+        struid = uidpreset
 
 while True:
     print("Refresh attempt no.", str(refrnr))
@@ -61,7 +67,7 @@ while True:
     print("Total recent average credits for UID [", struid, "]: ", total_creds4, sep="")
     print("")
     while tryagain == 1:
-        optend = input("Type 'r' to refresh with same UID or 'a' to input and/or save another UID: ")
+        optend = input("Type 'r' to refresh with same UID or 'a' to search for another UID: ")
         if optend == "r":
             refrnr = refrnr + 1
             print(" ")
@@ -72,19 +78,8 @@ while True:
             if optend == "a":
                 refrnr = 0
                 print(" ")
-                truncatechoice = int(input("Type 1 if you want to save another UID (or not to keep the old one but search"
-                                            " a new one): "))
-                if truncatechoice == 1:
-                    uid = int(input("Enter new UID: "))
-                    struid = str(uid)
-                    open("webscrapuid", "w")
-                    fw2.truncate(0)
-                    fw2.write(struid)
-                    fw2.close()
-                    print("New uid successfully saved")
-                else:
-                    uid = int(input("Enter new UID: "))
-                    struid = str(uid)
+                uid = int(input("Enter new UID: "))
+                struid = str(uid)
                 print(" ")
                 break
             else:
