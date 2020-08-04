@@ -6,7 +6,8 @@ import sys
 refrnr = 0
 tryagain = 1
 f = open("webscrapuid", "r")
-uidpreset = f.read()
+uidpresetlines = f.read()
+uidpreset = "".join(uidpresetlines.splitlines())
 
 if uidpreset == "setup":
     f = open("webscrapuid", "w")
