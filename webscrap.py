@@ -8,6 +8,13 @@ tryagain = 1
 f = open("webscrapuid", "r")
 uidpreset = f.read()
 
+if uidpreset == "setup":
+    f = open("webscrapuid", "w")
+    f.truncate(0)
+    f.close()
+    print("Initial setup has initiated. Script stopping, please restart the script to get started.")
+    sys.exit(2)
+
 if uidpreset == "":
     uid = int(input("Enter a valid UID: "))
     struid = str(uid)
@@ -22,15 +29,8 @@ if uidpreset == "":
         print("UID not saved")
         print("")
 else:
-    if uidpreset == "setup":
-        f = open("webscrapuid", "w")
-        f.truncate(0)
-        f.close()
-        print("Initial setup has initiated. Script stopping, please restart the script to get started.")
-        sys.exit(2)
-    else:
-        uidpreset = ''.join(c for c in uidpreset if c in digits)
-        struid = uidpreset
+     uidpreset = ''.join(c for c in uidpreset if c in digits)
+     struid = uidpreset
 
 while True:
     print("Refresh attempt no.", str(refrnr))
