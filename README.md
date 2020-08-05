@@ -10,4 +10,4 @@
 * And you are done, just run the .bat file and the script should be running well.
 * If it's your first time oppening the script, you will need to restart it after you see the message. This is done because I can't put blank files on github.
 
-Hello, thanks for installing my little python script made for checking Minecraft at home credits/recent average credits for an user.
+Hello, thanks for installing my little python script made for checking Minecraft at home credits/recent average credits for an user. In case there are any bugs/errors don't forget to DM me on Discord. Are4#2139
